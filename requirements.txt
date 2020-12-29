@@ -1,4 +1,5 @@
 asgiref==3.2.10
+dj-database-url==0.5.0
 Django==3.0.8
 django-extensions==3.0.5
 gunicorn==20.0.4
@@ -6,6 +7,7 @@ mysql-connector-python==8.0.20
 mysqlclient==2.0.1
 Pillow==7.2.0
 protobuf==3.12.2
+psycopg2-binary==2.8.6
 pytz==2020.1
 six==1.15.0
 sqlparse==0.3.1
