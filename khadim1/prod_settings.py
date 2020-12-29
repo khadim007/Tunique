@@ -11,6 +11,6 @@ DATABASES['default'] = dj_database_url.config()
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware']
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SECRET_KEY = 'f7_$#$+*8j4+9_-*waiqhdzfg#jz(!g42x4y$93tylx^qetc8g'
+# SECRET_KEY = os.environ['SECRET_KEY']
 
 ALLOWED_HOSTS = ['khadim007.herokuapp.com']
