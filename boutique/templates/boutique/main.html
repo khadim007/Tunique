@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Accueil</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}">
+	<meta charset="UTF-8">
+	<script type="text/javascript">
+		var user = '{{ request.user }}'
+
+		function getToken(name) {
+		    let cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        const cookies = document.cookie.split(';');
+		        for (let i = 0; i < cookies.length; i++) {
+		            const cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		const csrftoken = getToken('csrftoken');
+
+
+		function getCookie(name){
+			var cookieArr = document.cookie.split(";");
+			for (var i = 0; i < cookieArr.length ; i++){
+				var cookiePair = cookieArr[i].split("=");
+				if(name == cookiePair[0].trim()){
+					return decodeURIComponent(cookiePair[1])
+				}
+			}
+			return null;
+		}
+		var panier = JSON.parse(getCookie('panier'));
+		console.log("panier:", panier);
+		if( panier == undefined){
+			panier = {}
+			console.log("panier etait cree!");
+			document.cookie = 'panier=' + JSON.stringify(panier) + ";domain=;path=/" 
+		}
+
+	</script>
+</head>
+<body>
+
+	<div id="navig">
+		<div id="haut1">
+			<img id="tel" src="{% static 'images/telephone.png' %}" width="15" height="15" style="margin-top: 0px;">
+			Tel : 77 536 95 54
+		</div>
+		<div id="haut2" class="navbar navbar-expand-lg navbar-dark bg-dark col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 0px;">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 50px;">
+				    <ul class="navbar-nav mr-auto">
+				    	<li class="nav-item active">
+					        <a class="nav-link" href="{% url 'accueil' %}" id="lien">Accueil <span class="sr-only">(current)</span></a>
+					    </li>
+				        <li class="nav-item active">
+				      	    <a class="nav-link" href="{% url 'tunique' %}" id="lien">Tunique <span class="sr-only">(current)</span></a>
+				        </li>
+				        <li class="nav-item active">
+				      	    <a class="nav-link" href="{% url 'accessoirs' %}" id="lien">Accessoires <span class="sr-only">(current)</span></a>
+				        </li>
+				        <li class="nav-item active">
+				      	    <a class="nav-link" href="{% url 'alimentation' %}" id="lien">Alimentation <span class="sr-only">(current)</span></a>
+				        </li>
+				    </ul>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="text-align: center; margin-top: 0px;">
+				<a class="navbar-brand" href="{% url 'accueil' %}" style="margin-top: 0px; top: 0;">
+		    		<img id="tel" src="{% static 'images/logo.jpeg' %}" width="125" height="55" style="margin-top: 0px; top: 0;">
+		  		</a>
+			</div>
+				
+		  	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 0px;">
+				<div class="form-inline my-2 my-lg-0" style="float: right;">
+				    <!-- <a href="#"class="btn btn-warning">Login</a> -->
+					<div class="form-inline">
+						<a href="{% url 'panier' %}">
+						    <img  id="cart-icon" src="{% static 'images/cart.png' %}">
+						</a>
+						<p id="cart-total">{{panierArticles}}</p>
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+
+
+	
+
+	<div id="corps">
+		<div id="rep">	
+		</div>
+		<div id="tof">
+			<img src="{% static 'images/.png' %}" />
+		</div>
+	{% block content %}
+
+
+	{% endblock content %}
+	</div>
+	
+
+	<hr width="70%">
+
+	<div id="comptes">
+		<h3 style="text-align: center;">Suivez-nous sur les réseaux sociaux</h3>
+		<p style="text-align: center;">
+			<a href="https://web.facebook.com/Les-Tuniques-d-Alima-510756812450683/" target="_blank"><img src="{% static 'images/facebook.png' %}"/></a>
+			<a href="https://api.whatsapp.com/send?phone=+221775369554&text=Salut,%20Je%20vous%20contactes%20%C3%A0%20partir%20de%20lestuniquesdalima.sn%20." target="_blank"><img src="{% static 'images/whatsapp.png' %}"/></a>
+			<a href="https://www.instagram.com/les_tunique_dalima/" target="_blank"><img src="{% static 'images/instagram.png' %}"/></a>
+		</p>
+	</div>
+
+	<div id="fin">
+		<!-- <p style="text-align: center;">
+			<a href="{% url 'accueil' %}"><img src="{% static 'images/logo.jpeg' %}" width="125" height="55"/></a>
+		</p> -->
+		<br/>
+		<h2 style="text-align: center; color: white;">Vous pouvez payer par</h2>
+			<div class="col-lg-12" style="position: static;">
+				<p style="text-align: center;">
+				<img src="{% static 'images/orange_money.png' %}" width="50px" class="arrondie"/>
+				<!-- <img src="{% static 'images/wari.png' %}" width="50px" class="arrondie"/>
+				<img src="{% static 'images/wester_union.png' %}" width="50px" class="arrondie"/>
+				<img src="{% static 'images/ria.png' %}" width="50px" class="arrondie"/> -->
+				</p>
+			</div>
+		<br/>
+		<hr width="70%" style=" border: 1px solid white;">
+		<br/>
+
+		<p style="text-align: center; color: white;">&#169; 2020 Les tuniques d'Alima. Tous les droits réservés</p>
+		<br/>
+		<p style="text-align: center; color: white;">Fait par <a href="https://www.instagram.com/khadim__007/" target="_blank" style="color: white!important;">Khadim007</a></p>
+	</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{% static 'js/panier.js' %}"></script>
+
+</body>
+</html>
