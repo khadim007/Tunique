@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
 # Create your models here.
 
 class Client(models.Model):
@@ -13,12 +15,13 @@ class Client(models.Model):
 	
 
 
+
 class Produit(models.Model):
 	nom = models.CharField(max_length = 200)
 	prix = models.DecimalField(max_digits=7, decimal_places=2)
 	digital = models.BooleanField(default = False, null = True, blank = False)
 	image = models.ImageField(null = True, blank = False)
-	typee = models.CharField(max_length = 200, default = "tunique")
+	typee = models.CharField(max_length = 210, default = "tunique")
 
 	def __str__(self):
 		return self.nom

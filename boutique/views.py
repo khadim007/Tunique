@@ -10,6 +10,7 @@ import json
 import datetime
 # from io import StringIO
 from . utils import cookiePanier, panierData, guestCommande
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -37,7 +38,13 @@ def tunique(request):
 	panierArticles = data['panierArticles']
 
 	tuniques = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "tunique")
-	context = {'tuniques':tuniques,'panierArticles':panierArticles}
+
+	paginator = Paginator(tuniques, per_page=3)
+	page_number = request.GET.get('page', 1)
+	page_obj = paginator.get_page(page_number)
+
+	context = {'tuniques':page_obj.object_list,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
+
 	return render(request,'boutique/tunique.html', context)
 
 
@@ -47,7 +54,12 @@ def accessoirs(request):
 	panierArticles = data['panierArticles']
 
 	accessoires = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "accessoire")
-	context = {'accessoires':accessoires,'panierArticles':panierArticles}
+
+	paginator = Paginator(accessoires, per_page=3)
+	page_number = request.GET.get('page', 1)
+	page_obj = paginator.get_page(page_number)
+
+	context = {'accessoires':accessoires,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
 	return render(request,'boutique/accessoirs.html', context)
 
 
@@ -81,7 +93,12 @@ def alimentation(request):
 	panierArticles = data['panierArticles']
 
 	aliments = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "aliment")
-	context = {'aliments':aliments,'panierArticles':panierArticles}
+
+	paginator = Paginator(aliments, per_page=3)
+	page_number = request.GET.get('page', 1)
+	page_obj = paginator.get_page(page_number)
+
+	context = {'aliments':aliments,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
 	return render(request,'boutique/alimentation.html', context)
 
 
