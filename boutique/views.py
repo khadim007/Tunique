@@ -39,7 +39,7 @@ def tunique(request):
 
 	tuniques = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "tunique")
 
-	paginator = Paginator(tuniques, per_page=3)
+	paginator = Paginator(tuniques, per_page=40)
 	page_number = request.GET.get('page', 1)
 	page_obj = paginator.get_page(page_number)
 
@@ -55,7 +55,7 @@ def accessoirs(request):
 
 	accessoires = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "accessoire")
 
-	paginator = Paginator(accessoires, per_page=3)
+	paginator = Paginator(accessoires, per_page=40)
 	page_number = request.GET.get('page', 1)
 	page_obj = paginator.get_page(page_number)
 
@@ -94,7 +94,7 @@ def alimentation(request):
 
 	aliments = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "aliment")
 
-	paginator = Paginator(aliments, per_page=3)
+	paginator = Paginator(aliments, per_page=40)
 	page_number = request.GET.get('page', 1)
 	page_obj = paginator.get_page(page_number)
 
