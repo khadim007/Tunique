@@ -58,6 +58,7 @@ def guestCommande(request , data):
 	print('L\'utilisateur ne s\'est pas authentifié ...')
 
 	print('COOKIES:', request.COOKIES)
+	prenom = data['form']['prenom']
 	nom = data['form']['nom']
 	email = data['form']['email']
 
@@ -68,6 +69,7 @@ def guestCommande(request , data):
 		email = email,
 		)
 	client.nom = nom
+	client.prenom = prenom
 	client.save()
 
 	commande = Commande.objects.create(

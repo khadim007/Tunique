@@ -13,5 +13,6 @@ urlpatterns = [
     path('alimentation/', views.alimentation, name="alimentation"),
     path('update_article/', views.updateArticle, name="update_article"),
     path('process_commande/', views.processCommande, name="process_commande"),
+    path('process_paydunya/', views.processPaydunya, name="process_paydunya"),
 
 ]
