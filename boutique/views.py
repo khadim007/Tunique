@@ -233,7 +233,7 @@ def processPaydunya(request):
 # 	invoice.add_items(items)
 
 
-# 	invoice.description = ""
+# 	invoice.description = "Specialiste en tunique"
 
 
 

@@ -14,7 +14,7 @@
 					<div class="cadre" style="border-radius: 0 0 4px 4px;">
 						<h5><strong>{{aliment.nom}}</strong>
 						<hr>
-						<a href="{% url 'panier' %}"><button data-produit = "{{ aliment.id }}" data-action = "add" class="btn btn-outline-secondary add-btn update-panier">Ajouter au panier</button></a>
+						<button data-produit = "{{ aliment.id }}" data-action = "add" class="btn btn-outline-secondary add-btn update-panier">Ajouter au panier</button>
 						<p style="display: inline-block; float: right; font-size: 15px;">{{aliment.prix|floatformat:"0"}}Fcfa</p>
 					</div>
 				</div>

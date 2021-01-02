@@ -105,9 +105,9 @@
 		submitFormData()
 	})
 
-	document.getElementById('make-payment').addEventListener('click',function(e){
-		submitFormData2()
-	})
+	// document.getElementById('make-payment2').addEventListener('click',function(e){
+	// 	submitFormData2()
+	// })
 
 	function submitFormData(){
 		console.log('boutton de payement clique ')
@@ -173,43 +173,43 @@
 
 	}
 
-	function submitFormData2(){
-		console.log('boutton de payement 2 clique ')
-		var userFormData = `{"prenom": null, "nom": null, "email": null, "total": "${total}"}`
+	// function submitFormData2(){
+	// 	console.log('boutton de payement 2 clique ')
+	// 	var userFormData = `{"prenom": null, "nom": null, "email": null, "total": "${total}"}`
 		
-		var livraisonInfo = `{"adresse": null, "region": null, "pays": null, "telephone": null}`
+	// 	var livraisonInfo = `{"adresse": null, "region": null, "pays": null, "telephone": null}`
 		
 		
 
-		if(livraison != 'False'){
-			livraisonInfo = `{"adresse": "${form.adresse.value}", "region": "${form.region.value}", "pays": "${form.pays.value}", "telephone": "${form.telephone.value}"}`
-		}
+	// 	if(livraison != 'False'){
+	// 		livraisonInfo = `{"adresse": "${form.adresse.value}", "region": "${form.region.value}", "pays": "${form.pays.value}", "telephone": "${form.telephone.value}"}`
+	// 	}
 
-		if(user == 'AnonymousUser'){
-			userFormData = `{"prenom": "${form.prenom.value}", "nom": "${form.nom.value}", "email": "${form.email.value}", "total": "${total}"}`;
-		}
+	// 	if(user == 'AnonymousUser'){
+	// 		userFormData = `{"prenom": "${form.prenom.value}", "nom": "${form.nom.value}", "email": "${form.email.value}", "total": "${total}"}`;
+	// 	}
 
-		var url = "/process_paydunya/"
-		fetch(url,{
-			method:'POST',
-			headers:{
-				'Content-Type':'application/json',
-				'X-CSRFToken':csrftoken,
-			},
-			body: `{"form":${userFormData}, "livraison":${livraisonInfo}}`
-		})
-		.then((response) => response.json())
-		.then((data) => {
-			console.log('Success:',data);
-			alert('transaction complete');
+	// 	var url = "/process_paydunya/"
+	// 	fetch(url,{
+	// 		method:'POST',
+	// 		headers:{
+	// 			'Content-Type':'application/json',
+	// 			'X-CSRFToken':csrftoken,
+	// 		},
+	// 		body: `{"form":${userFormData}, "livraison":${livraisonInfo}}`
+	// 	})
+	// 	.then((response) => response.json())
+	// 	.then((data) => {
+	// 		console.log('Success:',data);
+	// 		alert('transaction complete');
 
-			panier = {}
-			document.cookie = 'panier=' + JSON.stringify(panier) + ";domain=;path=/;Secure"
+	// 		panier = {}
+	// 		document.cookie = 'panier=' + JSON.stringify(panier) + ";domain=;path=/;Secure"
 
-			window.location.href = "{% url 'accueil' %}"
-		});
+	// 		window.location.href = "{% url 'accueil' %}"
+	// 	});
 
-	}
+	// }
 
 
 </script>
