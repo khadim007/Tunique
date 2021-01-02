@@ -11,8 +11,8 @@ import datetime
 # from io import StringIO
 from . utils import cookiePanier, panierData, guestCommande
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-import paydunya
-from paydunya import Store, InvoiceItem
+# import paydunya
+# from paydunya import Store, InvoiceItem
 
 
 
@@ -171,81 +171,85 @@ def processCommande(request):
 
 
 def processPaydunya(request):
-	transactionId = datetime.datetime.now().timestamp()
-	data = json.loads(request.body)
+	return JsonResponse('Payment complet!', safe=False)
+# 	transactionId = datetime.datetime.now().timestamp()
+# 	data = json.loads(request.body)
 
-	if request.user.is_authenticated:
-		client = request.user.client
-		commande, created = Commande.objects.get_or_create(client=client, complete=False)
+# 	if request.user.is_authenticated:
+# 		client = request.user.client
+# 		commande, created = Commande.objects.get_or_create(client=client, complete=False)
 
-	else:
-		client, commande = guestCommande(request, data)
+# 	else:
+# 		client, commande = guestCommande(request, data)
 
 
-	total = float(data['form']['total'])
-	commande.transactionId = transactionId
+# 	total = float(data['form']['total'])
+# 	commande.transactionId = transactionId
 
-	if total == commande.get_panier_total:
-		commande.complete = True
-	commande.save()
+# 	if total == commande.get_panier_total:
+# 		commande.complete = True
+# 	commande.save()
 
-	if commande.livraison == True:
-		LivraisonAdresse.objects.create(
-			client = client,
-			commande = commande,
-			adresse = data['livraison']['adresse'],
-			region = data['livraison']['region'],
-			pays = data['livraison']['pays'],
-			telephone = data['livraison']['telephone'],
-		)
+# 	if commande.livraison == True:
+# 		LivraisonAdresse.objects.create(
+# 			client = client,
+# 			commande = commande,
+# 			adresse = data['livraison']['adresse'],
+# 			region = data['livraison']['region'],
+# 			pays = data['livraison']['pays'],
+# 			telephone = data['livraison']['telephone'],
+# 		)
 
-	PAYDUNYA_ACCESS_TOKENS = {
-		'PAYDUNYA-MASTER-KEY': "bTWZ1OGu-IXpy-Ml9P-e4Z3-ig09l0hEjASe",
-		'PAYDUNYA-PRIVATE-KEY': "test_private_qbGW0GXa3pXvjqSFfdip4pmfbpR",
-		'PAYDUNYA-TOKEN': "8F4urgDEJ3oqHAlegvPP"
-	}
-	paydunya.debug = True
-	paydunya.API_keys = PAYDUNYA_ACCESS_TOKENS
+# 	PAYDUNYA_ACCESS_TOKENS = {
+# 		'PAYDUNYA-MASTER-KEY': "bTWZ1OGu-IXpy-Ml9P-e4Z3-ig09l0hEjASe",
+# 		'PAYDUNYA-PRIVATE-KEY': "test_private_qbGW0GXa3pXvjqSFfdip4pmfbpR",
+# 		'PAYDUNYA-TOKEN': "8F4urgDEJ3oqHAlegvPP"
+# 	}
+# 	paydunya.debug = True
+# 	paydunya.API_keys = PAYDUNYA_ACCESS_TOKENS
 
 
 	
 
-	store = paydunya.Store(name='Les tuniques d\'Alima')
-	invoice = paydunya.Invoice(store)
+# 	store = paydunya.Store(name='Les tuniques d\'Alima')
+# 	invoice = paydunya.Invoice(store)
 	
-	store = Store(name='Les tuniques d\'Alima')
+# 	store = Store(name='Les tuniques d\'Alima')
 
-# L'ajout d'éléments à votre facture est très basique.
-# Les paramètres attendus sont nom du produit, la quantité, le prix unitaire,
-# le prix total et une description.
-	items = [
-		# for article in articles:
-			InvoiceItem(
-				name="",
-				quantity="",
-				unit_price="",
-				total_price=0,
-				description=""
-			),
-		]
-	invoice = paydunya.Invoice(store)
-	invoice.add_items(items)
-
-
-	invoice.description = ""
+# # L'ajout d'éléments à votre facture est très basique.
+# # Les paramètres attendus sont nom du produit, la quantité, le prix unitaire,
+# # le prix total et une description.
+# 	items = [
+# 		# for article in articles:
+# 			InvoiceItem(
+# 				name="",
+# 				quantity="",
+# 				unit_price="",
+# 				total_price=0,
+# 				description=""
+# 			),
+# 		]
+# 	invoice = paydunya.Invoice(store)
+# 	invoice.add_items(items)
 
 
+# 	invoice.description = ""
 
-	invoice = paydunya.Invoice(store)
-	invoice.add_items(items)
 
-	invoice.total_amount = float(total)
-	successful, response = invoice.create()
-	if successful:
-		print('response redirection : ', response)
-	else:
-		print('response no redirection : ', response)
-		return JsonResponse('Payment complet!', safe=False)			
+
+# 	invoice = paydunya.Invoice(store)
+# 	invoice.add_items(items)
+
+# 	invoice.total_amount = float(total)
+# 	successful, response = invoice.create()
+# 	if successful:
+# 		print('response redirection : ', response)
+# 	else:
+# 		print('response no redirection : ', response)
+# 		return JsonResponse('Payment complet!', safe=False)			
+
+
+
 
 
 
