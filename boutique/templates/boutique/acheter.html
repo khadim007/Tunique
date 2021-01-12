@@ -148,6 +148,7 @@
 
 		var url = "/process_commande/"
 		fetch(url,{
+			data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
 			method:'POST',
 			headers:{
 				'Content-Type':'application/json',

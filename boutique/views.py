@@ -11,6 +11,7 @@ import datetime
 # from io import StringIO
 from . utils import cookiePanier, panierData, guestCommande
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.views.decorators.csrf import csrf_exempt, csrf_protect
 # import paydunya
 # from paydunya import Store, InvoiceItem
 
@@ -130,7 +131,18 @@ def updateArticle(request):
 
 	return JsonResponse('L\'article est ajouté', safe=False)
 
+# @csrf_exempt
+# def my_view(request):
 
+#     @csrf_protect
+#     def protected_path(request):
+#         do_something()
+
+#     if some_condition():
+#        return protected_path(request)
+#     else:
+#        do_something_else()
+       
 def processCommande(request):
 	transactionId = datetime.datetime.now().timestamp()
 	data = json.loads(request.body)
