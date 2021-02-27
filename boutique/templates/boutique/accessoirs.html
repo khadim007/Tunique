@@ -5,14 +5,28 @@
 	
 		
 		<div id="corps1">
-			<h2 style="text-align: center; text-decoration: underline;">Voici les accéssoirs du boutique</h2>
-			<hr width="70%" style="text-align: center;">
-			<hr width="5%" style="text-align: center;">
+			
+			<div class="container">
+  				<svg viewBox="0 0 960 300">
+					<symbol id="s-text">
+						<text text-anchor="middle" x="50%" y="80%">ACCESSOIRES</text>
+					</symbol>
+
+					<g class = "g-ants">
+						<use xlink:href="#s-text" class="text-copy"></use>
+						<use xlink:href="#s-text" class="text-copy"></use>
+						<use xlink:href="#s-text" class="text-copy"></use>
+						<use xlink:href="#s-text" class="text-copy"></use>
+						<use xlink:href="#s-text" class="text-copy"></use>
+					</g>
+				</svg>
+			</div>
+
 			<div id="objeAccueil" class="form-inline" style="width: 100%;">
 				
 				{% for accessoire in accessoires %}
 				<div class="col-xs-6 col-sm-4 col-md-3" style="position: static; margin-top: 35px;">
-					<img class="photoP" src="{{accessoire.imageURL}}"/>
+					<img class="photoP zoom" src="{{accessoire.imageURL}}"/>
 					<div class="cadre" style="border-radius: 0 0 4px 4px;">
 						<h5><strong>{{accessoire.nom}}</strong>
 						<hr>
