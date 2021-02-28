@@ -27,11 +27,12 @@
 				{% for accessoire in accessoires %}
 				<div class="col-xs-6 col-sm-4 col-md-3" style="position: static; margin-top: 35px;">
 					<img class="photoP zoom" src="{{accessoire.imageURL}}"/>
-					<div class="cadre" style="border-radius: 0 0 4px 4px;">
-						<h5><strong>{{accessoire.nom}}</strong>
-						<hr>
-						<button data-produit = "{{ accessoire.id }}" data-action = "add" class="btn btn-outline-secondary add-btn update-panier">Ajouter au panier</button>
-						<p style="display: inline-block; float: right; font-size: 15px;">{{accessoire.prix|floatformat:"0"}}Fcfa</p>
+					<div class="cadre" style="border-radius: 0 0 4px 4px; background-image: url({% static 'images/im.jpeg' %});">
+						<h5  style="text-align: center; color: black; margin-bottom: 0px;"><strong>{{accessoire.nom}}</strong>
+						<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
+						<p style="text-align: center; font-size: 15px; margin-bottom: 0px;">{{accessoire.prix|floatformat:"0"}}Fcfa</p>
+						<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
+						<button data-produit = "{{ accessoire.id }}" data-action = "add" class="btn btn-outline-dark add-btn update-panier">Ajouter au panier</button>
 					</div>
 				</div>
 				{% endfor %}
