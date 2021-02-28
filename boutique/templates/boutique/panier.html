@@ -18,7 +18,7 @@
 				<br/>
 				<div class="cadre">
 					<div class="ligne-panier">
-						<div style="flex:2"></div>
+						<div style="flex:1"></div>
 						<div style="flex:2"><strong>Article</strong></div>
 						<div style="flex:1"><strong>Prix</strong></div>
 						<div style="flex:1"><strong>Quantité</strong></div>
@@ -27,7 +27,7 @@
 
 					{% for article in articles %}
 					<div class="ligne-panier">
-						<div style="flex:2"><img style="width: 15%;" src="{{article.produit.imageURL}}"></div>
+						<div style="flex:1"><img style="width: 25%;" src="{{article.produit.imageURL}}"></div>
 						<div style="flex:2"><p>{{ article.produit.nom }}</p></div>
 						<div style="flex:1"><p>{{ article.produit.prix|floatformat:"0"}}Fcfa</p></div>
 						<div style="flex:1">
