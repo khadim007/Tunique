@@ -16,6 +16,10 @@ def tunique(request):
 	context = {}
 	return render(request,'tunique.html', context)
 
+def boss(request):
+	context = {}
+	return render(request,'boss.html', context)
+
 def accessoirs(request):
 	context = {}
 	return render(request,'accessoirs.html', context)

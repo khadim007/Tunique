@@ -35,6 +35,7 @@ class Produit(models.Model):
 			url = ""
 		return url
 
+
 class Commande(models.Model):
 	client = models.ForeignKey(Client, on_delete = models.SET_NULL, blank = True, null = True)
 	dateCommande = models.DateTimeField(auto_now_add = True)

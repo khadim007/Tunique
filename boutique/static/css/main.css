@@ -69,7 +69,6 @@ h2,h3,h4,h5,h6{
     top: 0;
     left: 0;
     width: 100%;
-    height: 25px;
     margin-bottom: 0px;
     z-index: 100;
 } 
@@ -81,6 +80,12 @@ h2,h3,h4,h5,h6{
 	margin-top: 0px;
 	z-index: 100;
 
+}
+
+#lien{
+	font-size: 20px; 
+	font-weight: bolder; 
+	color: #4b566b !important;
 }
 
 #tel{

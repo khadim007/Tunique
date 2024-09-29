@@ -4,8 +4,8 @@
 {% block content %}
 	
 		
-		<div class="row col-lg-12" style="position: static;">
-			<div class="col-lg-6" style="position: static;">
+		<div class="col-lg-12 form-inline" style="position: static; margin-bottom:15px; padding-right: 0px; padding-left: 0px;">
+			<div class="col-lg-6">
 				<div class="cadre" id="form-wrapper">
 					<form id="form">
 						<div id="user-info">
@@ -22,7 +22,7 @@
 						
 						<div id="livraison-info">
 							<hr>
-							<p>Informations sur la livraison:</p>
+							<p>Informations sur la livraison :</p>
 							<hr>
 							<div class="form-field">
 								<input class="form-control" type="text" name="adresse" placeholder="Adresse..">
@@ -58,7 +58,7 @@
 				<div class="cadre">
 					<a  class="btn btn-outline-dark" href="{% url 'panier' %}">&#x2190; Retour au panier</a>
 					<hr>
-					<h3>Récapitulatif de la commande</h3>
+					<h5>Récapitulatif de la commande</h5>
 					<hr>
 					{% for article in articles %}
 					<div class="ligne-panier">
@@ -79,7 +79,8 @@
 	var livraison = '{{ commande.livraison }}'
 	var total = '{{ commande.get_panier_total|floatformat:"0" }}'
 
-	if (livraison == 'False'){
+	// cas ou le client s'est authentifier
+	if(livraison == 'False'){
 		document.getElementById('livraison-info').innerHTML = ''
 	}
 
@@ -91,14 +92,14 @@
 		document.getElementById('form-wrapper').classList.add('hidden');
 		document.getElementById('payment-info').classList.remove('hidden');
 	}
+	//
+
 
 	var form = document.getElementById('form')
 	form.addEventListener('submit',function(e){
 		e.preventDefault()
-		console.log('Form envoyer...')
 		document.getElementById('form-button').classList.add('hidden')
 		document.getElementById('payment-info').classList.remove('hidden')
-
 	})
 
 	document.getElementById('make-payment').addEventListener('click',function(e){
@@ -110,40 +111,15 @@
 	// })
 
 	function submitFormData(){
-		console.log('boutton de payement clique ')
 
-		// var userFormData = {
-		// 	nom:null,
-		// 	email:null,
-		// 	total:total,
-		// }
-		// var userFormData = '{"nom": null, "email": null, "total": "1000"}'
 		var userFormData = `{"prenom": null, "nom": null, "email": null, "total": "${total}"}`
-		
-
-
-		// var livraisonInfo = {
-		// 	'adresse':null,
-		// 	'region':null,
-		// 	'pays':null,
-		// 	'zipcode':null,
-		// }
-		// var livraisonInfo = '{"adresse":null,"region":null,"pays":null,"zipcode":null}'
-		var livraisonInfo = `{"adresse": null, "region": null, "pays": null, "telephone": null}`
-		
-
-		if(livraison != 'False'){
-			livraisonInfo = `{"adresse": "${form.adresse.value}", "region": "${form.region.value}", "pays": "${form.pays.value}", "telephone": "${form.telephone.value}"}`
-			// livraisonInfo.adresse = form.adresse.value
-			// livraisonInfo.region = form.region.value
-			// livraisonInfo.pays = form.pays.value
-			// livraisonInfo.zipcode = form.zipcode.value
-		}
-
 		if(user == 'AnonymousUser'){
 			userFormData = `{"prenom": "${form.prenom.value}", "nom": "${form.nom.value}", "email": "${form.email.value}", "total": "${total}"}`;
-			// userFormData.nom = form.nom.value
-			// userFormData.email = form.email.value
+		}
+
+		var livraisonInfo = `{"adresse": null, "region": null, "pays": null, "telephone": null}`
+		if(livraison != 'False'){
+			livraisonInfo = `{"adresse": "${form.adresse.value}", "region": "${form.region.value}", "pays": "${form.pays.value}", "telephone": "${form.telephone.value}"}`
 		}
 
 		var url = "/process_commande/"
@@ -154,14 +130,9 @@
 				'Content-Type':'application/json',
 				'X-CSRFToken':csrftoken,
 			},
-			//body:JSON.stringify({'form':userFormData, 'livraison':livraisonInfo})
-			//body:'{"form":userFormData, "livraison":livraisonInfo}'
 			body: `{"form":${userFormData}, "livraison":${livraisonInfo}}`
 		})
 		.then((response) => response.json())
-		// .then((response) => {
-		// 	response.json();
-		// })
 		.then((data) => {
 			console.log('Success:',data);
 			alert('transaction complete');
@@ -173,6 +144,21 @@
 		});
 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// function submitFormData2(){
 	// 	console.log('boutton de payement 2 clique ')

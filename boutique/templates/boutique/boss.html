@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block content %}
-	
-		<section class="container pt-md-3 pb-5 mb-md-3 ">	
+
+		<section class="container pt-md-3 pb-5 mb-md-3 ">
 			<div id="corps1" class="row pt-4">
 				<div class="container">
-	  				<svg viewBox="0 0 960 300" width="100%" height="auto">
+	  				<svg viewBox="0 0 2000 400" width="100%" height="auto">
 						<symbol id="s-text">
-							<text text-anchor="middle" x="50%" y="80%">TUNIQUES</text>
+							<text text-anchor="middle" x="50%" y="80%">TENUE TRADITIONNELLE</text>
 						</symbol>
 
 						<g class = "g-ants">
@@ -22,21 +22,21 @@
 				</div>
 
 				<div id="objeAccueil" class="form-inline" style="width: 100%;">
-					{% for tunique in tuniques %}
+					{% for boss in bosss %}
 					<div class="col-lg-3 col-md-4 col-sm-6 col-6  mb-4  px-1 mb-sm-4" style="position: static; margin-top: 35px;">
-						<img class="photoP zoom" src="{{tunique.imageURL}}"/>
+						<img class="photoP zoom" src="{{boss.imageURL}}" />
 						<div class="cadre" style="border-radius: 0 0 4px 4px;">
-							<h6 style="text-align: center; color: black; margin-bottom: 0px;"><strong>{{tunique.nom}}</strong></h6>
+							<h6 style="text-align: center; color: black; margin-bottom: 0px;"><strong>{{boss.nom}}</strong></h6>
 							<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
-							<p style="text-align: center;  font-size: 15px; margin-bottom: 0px;">{{tunique.prix|floatformat:"0"}}Fcfa</p>
+							<p style="text-align: center;  font-size: 15px; margin-bottom: 0px;">{{boss.prix|floatformat:"0"}}Fcfa</p>
 							<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
-							<p style="text-align: center; margin-bottom: 0px;"><button data-produit = "{{ tunique.id }}" data-action = "add" class="btn btn-outline-dark add-btn update-panier">Ajouter au panier</button></p>
+							<p style="text-align: center; margin-bottom: 0px;"><button data-produit = "{{ boss.id }}" data-action = "add" class="btn btn-outline-secondary add-btn update-panier">Ajouter au panier</button></p>
 						</div>
 					</div>
 					{% endfor %}
-					
+				
 				</div>
-			</div>	
+			</div>
 			<br/>
 			<div style="position: static;">
 				<ul class="pagination" style="justify-content: center; display: flex; position: static;">

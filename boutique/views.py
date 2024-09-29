@@ -30,8 +30,8 @@ def accueil(request):
 
 	tuniques = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "tunique")[:20]
 	accessoires = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "accessoire")[:20]
-	aliments = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "aliment")[:20]
-	context = {'tuniques':tuniques,'accessoires':accessoires, 'aliments':aliments,'panierArticles':panierArticles}
+	bosss = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "boss")[:20]
+	context = {'tuniques':tuniques,'accessoires':accessoires, 'bosss':bosss,'panierArticles':panierArticles}
 	return render(request,'boutique/accueil.html', context)
 
 
@@ -49,6 +49,22 @@ def tunique(request):
 	context = {'tuniques':page_obj.object_list,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
 
 	return render(request,'boutique/tunique.html', context)
+
+
+def boss(request):
+
+	data = panierData(request)
+	panierArticles = data['panierArticles']
+
+	bosss = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "boss")
+
+	paginator = Paginator(bosss, per_page=40)
+	page_number = request.GET.get('page', 1)
+	page_obj = paginator.get_page(page_number)
+
+	context = {'bosss':page_obj.object_list,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
+	
+	return render(request,'boutique/boss.html', context)
 
 
 def accessoirs(request):
@@ -88,21 +104,6 @@ def acheter(request):
 		
 	context = {"articles":articles,"commande":commande,"panierArticles":panierArticles}
 	return render(request,'boutique/acheter.html', context)
-
-
-def alimentation(request):
-
-	data = panierData(request)
-	panierArticles = data['panierArticles']
-
-	aliments = Produit.objects.order_by(F("id").desc(nulls_last=True)).filter(typee = "aliment")
-
-	paginator = Paginator(aliments, per_page=40)
-	page_number = request.GET.get('page', 1)
-	page_obj = paginator.get_page(page_number)
-
-	context = {'aliments':aliments,'panierArticles':panierArticles,'paginator':paginator,'page_number':int(page_number)}
-	return render(request,'boutique/alimentation.html', context)
 
 
 def updateArticle(request):
@@ -147,7 +148,7 @@ def processCommande(request):
 	transactionId = datetime.datetime.now().timestamp()
 	data = json.loads(request.body)
 
-	if request.user.is_authenticated:
+	if request.user.is_authenticated: #si l'utilisateur s'est authentifier sur son compte
 		client = request.user.client
 		commande, created = Commande.objects.get_or_create(client=client, complete=False)
 
@@ -157,6 +158,11 @@ def processCommande(request):
 
 	total = float(data['form']['total'])
 	commande.transactionId = transactionId
+
+	# print("------------------------")
+	# # print(vars(commande))
+	# print("Cmmande :",commande.get_panier_total)
+	# print("------------------------")
 
 	if total == commande.get_panier_total:
 		commande.complete = True

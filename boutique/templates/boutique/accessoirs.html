@@ -4,51 +4,52 @@
 {% block content %}
 	
 		
-		<div id="corps1">
-			
-			<div class="container">
-  				<svg viewBox="0 0 960 300">
-					<symbol id="s-text">
-						<text text-anchor="middle" x="50%" y="80%">ACCESSOIRES</text>
-					</symbol>
+		<section class="container pt-md-3 pb-5 mb-md-3 ">
+			<div id="corps1" class="row pt-4">
+				<div class="container">
+	  				<svg viewBox="0 0 960 300">
+						<symbol id="s-text">
+							<text text-anchor="middle" x="50%" y="80%">AUTRES</text>
+						</symbol>
 
-					<g class = "g-ants">
-						<use xlink:href="#s-text" class="text-copy"></use>
-						<use xlink:href="#s-text" class="text-copy"></use>
-						<use xlink:href="#s-text" class="text-copy"></use>
-						<use xlink:href="#s-text" class="text-copy"></use>
-						<use xlink:href="#s-text" class="text-copy"></use>
-					</g>
-				</svg>
-			</div>
-
-			<div id="objeAccueil" class="form-inline" style="width: 100%;">
-				
-				{% for accessoire in accessoires %}
-				<div class="col-xs-6 col-sm-4 col-md-3" style="position: static; margin-top: 35px;">
-					<img class="photoP zoom" src="{{accessoire.imageURL}}"/>
-					<div class="cadre" style="border-radius: 0 0 4px 4px; background-image: url({% static 'images/im.jpeg' %});">
-						<h5  style="text-align: center; color: black; margin-bottom: 0px;"><strong>{{accessoire.nom}}</strong>
-						<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
-						<p style="text-align: center; font-size: 15px; margin-bottom: 0px;">{{accessoire.prix|floatformat:"0"}}Fcfa</p>
-						<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
-						<button data-produit = "{{ accessoire.id }}" data-action = "add" class="btn btn-outline-dark add-btn update-panier">Ajouter au panier</button>
-					</div>
+						<g class = "g-ants">
+							<use xlink:href="#s-text" class="text-copy"></use>
+							<use xlink:href="#s-text" class="text-copy"></use>
+							<use xlink:href="#s-text" class="text-copy"></use>
+							<use xlink:href="#s-text" class="text-copy"></use>
+							<use xlink:href="#s-text" class="text-copy"></use>
+						</g>
+					</svg>
 				</div>
-				{% endfor %}
+
+				<div id="objeAccueil" class="form-inline" style="width: 100%;">
+					
+					{% for accessoire in accessoires %}
+					<div class="col-lg-3 col-md-4 col-sm-6 col-6  mb-4  px-1 mb-sm-4" style="position: static; margin-top: 35px;">
+						<img class="photoP zoom" src="{{accessoire.imageURL}}"/>
+						<div class="cadre" style="border-radius: 0 0 4px 4px;">
+							<h6  style="text-align: center; color: black; margin-bottom: 0px;"><strong>{{accessoire.nom}}</strong></h6>
+							<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
+							<p style="text-align: center; font-size: 15px; margin-bottom: 0px;">{{accessoire.prix|floatformat:"0"}}Fcfa</p>
+							<hr width="70%" style=" border: 1px solid white; margin-bottom: 3px; margin-top: 3px;">
+							<p style="text-align: center; margin-bottom: 0px;"><button data-produit = "{{ accessoire.id }}" data-action = "add" class="btn btn-outline-dark add-btn update-panier">Ajouter au panier</button></p>
+						</div>
+					</div>
+					{% endfor %}
 				
+				</div>
+			</div>	
+			<br/>
+			<div style="position: static;">
+				<ul class="pagination" style="justify-content: center; display: flex; position: static;">
+					{% for i in paginator.page_range %}
+					<li class="page-item {% if i == page_number %} active {% endif %} " style="position: static;">
+						<a class="page-link" href="?page={{i}}">{{i}}</a>
+					</li>
+					{% endfor %}
+				</ul>
 			</div>
-		</div>	
-		<br/>
-		<div style="position: static;">
-			<ul class="pagination" style="justify-content: center; display: flex; position: static;">
-				{% for i in paginator.page_range %}
-				<li class="page-item {% if i == page_number %} active {% endif %} " style="position: static;">
-					<a class="page-link" href="?page={{i}}">{{i}}</a>
-				</li>
-				{% endfor %}
-			</ul>
-		</div>
+		</section>
 
 
 	
