@@ -1,4 +1,25 @@
-venv
+# Environnements virtuels
+venv/
+myenv/
+
+# Fichiers compilés Python
 *.pyc
-staticfiles
+__pycache__/
+
+# Fichiers de base de données
+db.sqlite3
+
+# Fichiers statiques
+staticfiles/
+
+# Configuration locale
+*.local
+
+# Migrations Django
+*/migrations/*
+
+# Fichiers de log
+*.log
+
+# Fichiers secrets
 .env

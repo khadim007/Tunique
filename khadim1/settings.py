@@ -42,9 +42,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = get_env_variable('SECRET_KEY', ')=1)soi__1pqj-o_&^s-2(u4g)io-x_81k1^vz3@in5iow!qi&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com', 'khadim.pythonanywhere.com']
+
 
 
 
@@ -72,7 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'khadim1.urls'
@@ -150,8 +152,8 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -162,6 +164,19 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
-DATABASES = {
-    'default': dj_database_url.config(default='postgres://localhost')
-}
+# DATABASES = {
+#     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'boutique',
+#         'USER': 'alima',
+#         'PASSWORD': 'alimacisse121076',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
